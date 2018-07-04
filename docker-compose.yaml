@@ -1,0 +1,9 @@
+version: "2"
+services:
+    nginx:
+        image: ajslater/nginx
+        build: .
+        container_name: nginx
+        ports:
+            - "80:80"
+            - "443:443"

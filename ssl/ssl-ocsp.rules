@@ -1,0 +1,12 @@
+# OCSP stapling: nginx will poll the CA for signed OCSP responses, and
+# send them to clients so clients don't make their own OCSP calls.
+#
+# The ssl_trusted_certificate is a chain of intermediates *including* the
+# root certificate, and *excluding* the cert for your domain.
+#
+# See https://sslmate.com/blog/post/ocsp_stapling_in_apache_and_nginx
+# for more details on how nginx handles OCSP.
+ssl_stapling on;
+ssl_stapling_verify on;
+resolver 8.8.8.8 8.8.4.4 valid=86400;
+resolver_timeout 10;
