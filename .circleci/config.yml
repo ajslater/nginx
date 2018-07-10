@@ -13,6 +13,7 @@ jobs:
       - run:
             TAG=$(echo $CIRCLE_SHA1 | head -c 7);
             docker tag $IMAGE $IMAGE:$TAG;
+            docker push $IMAGE:$TAG;
+      - run:
             docker tag $IMAGE $IMAGE:latest;
-            docker push $TAG
-            docker push latest
+            docker push $IMAGE:latest
