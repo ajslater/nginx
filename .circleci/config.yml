@@ -3,8 +3,7 @@ jobs:
   build:
     branches:
       only: master
-    docker:
-      - image: ubuntu:18.04
+    machine: true
     environment:
         IMAGE_TAG: ajslater/nginx
         TAG: $IMAGE_TAG:$(echo $CIRCLE_SHA1 | head -c 7)
