@@ -2,9 +2,8 @@ version: 2
 jobs:
   build:
     machine: true
-    filters:
-        branches:
-            only: master
+    branches:
+      only: master
     steps:
       - checkout
       - run: docker login -e="." -u="$DOCKER_USER" -p="$DOCKER_PASS"
