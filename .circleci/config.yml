@@ -6,7 +6,7 @@ jobs:
       only: master
     steps:
       - checkout
-      - run: docker login -e="." -u="$DOCKER_USER" -p="$DOCKER_PASS"
+      - run: docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
       - run:
            IMAGE_TAG=ajslater/nginx
            docker build -t $IMAGE_TAG .
