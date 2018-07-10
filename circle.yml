@@ -1,0 +1,21 @@
+machine:
+    services:
+        - docker
+    environment:
+        IMAGE_TAG: ajslater/nginx
+
+dependancies:
+    override:
+        - docker build . -t ajslater/nginx
+
+test:
+    override:
+        - echo "success"
+
+deployment:
+    docker:
+        branch: master
+        commands:
+            - docker login -e="." -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD" hub.docker.com
+            - docker tag ajslater/nginx $IMAGE_TAG:$(echo $CIRCLE_SHA1 | head -c 7)
+            - docker push $IMAGE_TAG:$(echo $CIRCLE_SHA1 | head -c 7)
