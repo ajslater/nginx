@@ -5,7 +5,7 @@ jobs:
       only: master
     machine: true
     environment:
-        IMAGE_TAG: ajslater/nginx
+        IMAGE: ajslater/nginx
     steps:
       - checkout
       - run: docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
