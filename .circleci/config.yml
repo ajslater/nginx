@@ -1,16 +1,16 @@
 version: 2
 jobs:
   build:
-    machine: true
     branches:
       only: master
+    docker:
+      - image: ubuntu:18.04
+    environment:
+        IMAGE_TAG: ajslater/nginx
+        TAG: $IMAGE_TAG:$(echo $CIRCLE_SHA1 | head -c 7)
     steps:
       - checkout
       - run: docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-      - run:
-           IMAGE_TAG=ajslater/nginx
-           docker build -t $IMAGE_TAG .
-      - run:
-          TAG=$IMAGE_TAG:$(echo $CIRCLE_SHA1 | head -c 7)
-          docker tag ajslater/nginx $TAG
-          docker push $TAG
+      - run: docker build -t $IMAGE_TAG .
+      - run: docker tag $IMAGE_TAG $TAG
+      - run: ddocker push $TAG
