@@ -11,12 +11,14 @@ mount directories in /etc/conf.d/ with confs in the dirs
 ```yaml
 version: '2'
 services:
-    nginx_data:
+    your.org_data:
         build: your_nginx_data_dir/
         image: your.org/nginx_data
         container_name: nginx_data
         volumes:
-            - /config
+            - /srv/www/your.org
+            - /etc/nginx/ssl/your.org
+            - /etc/nginx/config.d/your.org
     nginx:
         image: ajslater/nginx
         container_name: nginx
@@ -24,7 +26,7 @@ services:
             - "80:80"
             - "443:443"
         volumes_from:
-            - nginx_data
+            - your.org_data:ro
 ```
 
 ## Docker Image
