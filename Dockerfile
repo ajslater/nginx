@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM alpine:3.11
 ARG version
 LABEL maintainer="AJ Slater <aj@slater.net>"
 LABEL version=$version
