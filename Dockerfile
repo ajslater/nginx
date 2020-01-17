@@ -1,11 +1,14 @@
-FROM alpine:3.11
-ARG version
+ARG ALPINE_VERSION
+FROM alpine:$ALPINE_VERSION
 LABEL maintainer="AJ Slater <aj@slater.net>"
-LABEL version=$version
+ARG PKG_VERSION
+LABEL version=${ALPINE_VERSION}_${PKG_VERSION}
 
-RUN apk add nginx nginx-mod-http-headers-more nginx-mod-http-fancyindex; \
-   rm -rf /var/cache/apk/*; \
-   mkdir /run/nginx;
+RUN apk add --no-cache \
+    nginx=$PKG_VERSION \
+    nginx-mod-http-headers-more=$PKG_VERSION \
+    nginx-mod-http-fancyindex=$PKG_VERSION;
+RUN mkdir /run/nginx;
 
 COPY default.conf /etc/nginx/conf.d/
 COPY ssl /etc/nginx/ssl

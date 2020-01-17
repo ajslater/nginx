@@ -1,6 +1,7 @@
 version: "2"
 services:
     nginx:
+        env_file: env
         image: ajslater/nginx
         build: .
         container_name: nginx
