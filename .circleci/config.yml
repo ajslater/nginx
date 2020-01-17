@@ -7,16 +7,6 @@ jobs:
     steps:
       - checkout
       - run: docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-      - run:
-             source env
-             docker build -t $IMAGE --build-arg ALPINE_VERSION=$ALPINE_VERSION --build-arg PKG_VERSION=$PKG_VERSION .
-      - run:
-             source env
-             VERSION=${ALPINE_VERSION}_${PKG_VERSION}
-             TAG=$VERSION-$(echo $CIRCLE_SHA1 | head -c 7);
-             docker tag $IMAGE $IMAGE:$TAG;
-             docker push $IMAGE:$TAG;
-      - run:
-             source env
-             docker tag $IMAGE $IMAGE:latest;
-             docker push $IMAGE:latest
+      - run: ./build.sh
+      - run: ./tag-version.sh
+      - run: ./tag-latest.sh
