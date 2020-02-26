@@ -6,6 +6,11 @@ jobs:
       - checkout
       - run: docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
       - run: ./build.sh
-    post-steps:
-      - run: ./tag-version.sh
-      - run: ./tag-latest.sh
+
+workflows:
+  build:
+    jobs:
+      build:
+        post-steps:
+          - run: ./tag-version.sh
+          - run: ./tag-latest.sh
