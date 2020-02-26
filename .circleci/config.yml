@@ -1,16 +1,17 @@
 version: 2.1
 jobs:
-  build:
+  nginx-build:
     machine: true
     steps:
       - checkout
-      - run: docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
       - run: ./build.sh
 
 workflows:
   build:
     jobs:
-      build:
+     - nginx-build:
+        pre-steps:
+          - run: docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
         post-steps:
           - run: ./tag-version.sh
           - run: ./tag-latest.sh
