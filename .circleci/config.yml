@@ -1,15 +1,14 @@
 version: 2.1
 jobs:
-  nginx-build:
+  alpine-build:
     machine: true
     steps:
       - checkout
       - run: ./build.sh
-
 workflows:
   build:
     jobs:
-     - nginx-build:
+      - alpine-build:
         pre-steps:
           - run: docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
         post-steps:
