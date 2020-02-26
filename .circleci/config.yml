@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  alpine-build:
+  build:
     machine: true
     steps:
       - checkout
