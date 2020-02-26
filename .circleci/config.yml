@@ -4,12 +4,6 @@ jobs:
     machine: true
     steps:
       - checkout
+      - run: docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
       - run: ./build.sh
-workflows:
-  build:
-    jobs:
-      - alpine-build:
-        pre-steps:
-          - run: docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-        post-steps:
-          - run: ./tag-and-push.sh
+      - run: ./tag-and-push.sh
