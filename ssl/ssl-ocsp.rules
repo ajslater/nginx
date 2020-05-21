@@ -8,5 +8,4 @@
 # for more details on how nginx handles OCSP.
 ssl_stapling on;
 ssl_stapling_verify on;
-resolver 8.8.8.8 8.8.4.4 valid=86400;
-resolver_timeout 10;
+#resolver 8.8.8.8 8.8.4.4 valid=86400s;
