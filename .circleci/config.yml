@@ -24,7 +24,7 @@ jobs:
         paths:
         - ./<< pipeline.parameters.image_archive >>
         - ./env
-        - ./tag-and-push.sh
+        - ./ci/tag-and-push.sh
   deploy:
     executor: docker-publisher
     steps:
@@ -35,7 +35,7 @@ jobs:
         command: docker load -i "./<< pipeline.parameters.image_archive >>"
     - run:
         name: Publish Docker Image to Docker Hub
-        command: ./tag-and-push.sh
+        command: ./ci/tag-and-push.sh
 
 workflows:
   version: 2.1
