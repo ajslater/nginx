@@ -1,7 +1,6 @@
-ARG BASE_VERSION
-FROM ajslater/alpine-base:$BASE_VERSION
-LABEL maintainer="AJ Slater <aj@slater.net>"
 ARG ALPINE_VERSION
+FROM alpine:$ALPINE_VERSION
+LABEL maintainer="AJ Slater <aj@slater.net>"
 ARG PKG_VERSION
 LABEL version=${ALPINE_VERSION}_${PKG_VERSION}
 
@@ -19,4 +18,4 @@ EXPOSE 443
 
 STOPSIGNAL SIGTERM
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
