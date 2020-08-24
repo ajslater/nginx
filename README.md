@@ -27,7 +27,14 @@ services:
             - "443:443"
         volumes_from:
             - your.org_data:ro
+        environment:
+            - PUID=1000
+            - GUID=1000
 ```
+
+## Environment Variables
+
+PUID & PGUID will run the process as a user with that UID and GID. If you omit those variables the process will run as root.
 
 ## Docker Image
 https://hub.docker.com/r/ajslater/nginx
