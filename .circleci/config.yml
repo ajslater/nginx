@@ -1,6 +1,10 @@
+executors:
+  latest-machine:
+    machine:
+      - image: ubuntu-2004:202010-01
 jobs:
   build:
-    machine: true
+    executor: latest-machine
     steps:
       - checkout
       - run:
@@ -14,7 +18,7 @@ jobs:
             - ./images
           root: .
   deploy:
-    machine: true
+    executor: latest-machine
     steps:
       - checkout
       - attach_workspace:
