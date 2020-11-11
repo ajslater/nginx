@@ -1,7 +1,8 @@
 #!/bin/bash
-set -euo pipefail
+set -xeuo pipefail
 # shellcheck source=../env
 source ./env
+
 function save-image {
     PLATFORM=$1
     OUTPUT="images/${PLATFORM}_image.tar"
