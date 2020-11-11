@@ -2,6 +2,7 @@
 set -euo pipefail
 source ./env
 #TAG=$VERSION-$(echo "$CIRCLE_SHA1" | head -c 7)
+export DOCKER_BUILDKIT=1
 
 function build-platform {
   PLATFORM=$1
