@@ -1,9 +1,6 @@
-executors:
-  docker-publisher:
-    machine: true
 jobs:
   build:
-    executor: docker-publisher
+    machine: true
     steps:
       - checkout
       - run:
@@ -17,7 +14,7 @@ jobs:
             - ./images
           root: .
   deploy:
-    executor: docker-publisher
+    machine: true
     steps:
       - checkout
       - attach_workspace:
@@ -28,6 +25,7 @@ jobs:
       - run:
           command: ./ci/tag-and-push.sh
           name: Publish Docker Image to Docker Hub
+version: 2.1
 workflows:
   build-deploy:
     jobs:
@@ -42,7 +40,7 @@ workflows:
       - deploy:
           filters:
             branches:
-              only: 
+              only:
                 - master
                 - main
           requires:
