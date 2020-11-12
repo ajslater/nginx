@@ -9,26 +9,14 @@ jobs:
       - checkout
       - run:
           command: ./build.sh
-          name: Build Nginx
-      - run:
-          command: ./ci/save-images.sh
-          name: Archive Docker image
-      - persist_to_workspace:
-          paths:
-            - ./images
-          root: .
+          name: Build
   deploy:
     executor: latest-machine
     steps:
       - checkout
-      - attach_workspace:
-          at: .
       - run:
-          command: ./ci/load-images.sh
-          name: Load saved Docker images
-      - run:
-          command: ./ci/tag-and-push.sh
-          name: Publish Docker Image to Docker Hub
+          command: DEPLOY=1 ./build.sh
+          name: Build & Deploy
 version: 2.1
 workflows:
   build-deploy:
@@ -38,8 +26,6 @@ workflows:
             branches:
               only:
                 - develop
-                - master
-                - main
                 - /.*-ci/
       - deploy:
           filters:
@@ -47,6 +33,4 @@ workflows:
               only:
                 - master
                 - main
-          requires:
-            - build
   version: 2.1

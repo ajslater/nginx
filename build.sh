@@ -1,21 +1,25 @@
 #!/bin/bash
-set -euo pipefail
+set -xeuo pipefail
 source ./env
 #TAG=$VERSION-$(echo "$CIRCLE_SHA1" | head -c 7)
 export DOCKER_BUILDKIT=1
 
-function build-platform {
-  PLATFORM=$1
-  docker build \
-      --platform "$PLATFORM" \
-      --file "Dockerfile.${PLATFORM}" \
-      --build-arg ALPINE_VERSION=$ALPINE_VERSION \
-      --build-arg PKG_VERSION=$PKG_VERSION \
-      --tag "$IMAGE:${PLATFORM}-${VERSION}" \
-      --tag "$IMAGE:${PLATFORM}-latest" \
-      .
-}
+if [ -n "${DEPLOY:-}" ]; then
+    PUSH="--push"
+    docker login --username="$DOCKER_USER" --password="$DOCKER_PASS"
+else
+    export BUILDX_NO_DEFAULT_LOAD=1
+    PUSH=
+fi
 
-for PLATFORM in "${PLATFORMS[@]}"; do
-  build-platform "$PLATFORM"
-done
+docker buildx create --use
+# shellcheck disable=SC2086
+docker buildx build \
+    --platform "$PLATFORMS" \
+    --build-arg ALPINE_VERSION=$ALPINE_VERSION \
+    --build-arg PKG_VERSION=$PKG_VERSION \
+    --build-arg VERSION=$VERSION \
+    --tag "$REPO:${VERSION}" \
+    --tag "$REPO:latest" \
+    $PUSH \
+    .

@@ -1,8 +1,8 @@
 ARG ALPINE_VERSION
-FROM arm64v8/alpine:$ALPINE_VERSION
+FROM alpine:$ALPINE_VERSION
 LABEL maintainer="AJ Slater <aj@slater.net>"
 ARG PKG_VERSION
-LABEL version=${ALPINE_VERSION}_${PKG_VERSION}
+LABEL version=$VERSION
 
 RUN apk add --no-cache \
     nginx=$PKG_VERSION \
