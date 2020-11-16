@@ -18,7 +18,7 @@ jobs:
     executor: latest-machine
     steps:
       - checkout
-     - run:
+      - run:
           command: docker-compose build
           name: Build
       - run:
