@@ -2,7 +2,7 @@
 set -xeuo pipefail
 source .env
 
-#docker buildx create --use
+docker buildx create --use
 # shellcheck disable=SC2086
 DOCKER_BUILDKIT=1 docker buildx build \
     --platform "$PLATFORMS" \
