@@ -1,9 +1,20 @@
-version: "3"
+version: "3.8"
 services:
   nginx:
-    env_file: env
-    image: ajslater/nginx
+    &nginx-build
+    env_file: .env
+    image: "$REPO:${VERSION}"
+    platform: "$PLATFORMS"
+    build:
+        context: .
+        args:
+            ALPINE_VERSION: "$ALPINE_VERSION"
+            PKG_VERSION: "$PKG_VERSION"
+            VERSION: "$VERSION"
     container_name: nginx
     ports:
       - "80:80"
       - "443:443"
+  nginx_latest:
+      << : *nginx-build
+      image: "$REPO:latest"
