@@ -4,7 +4,7 @@ source .env
 
 #docker buildx create --use
 # shellcheck disable=SC2086
-docker buildx build \
+DOCKER_BUILDKIT=1 docker buildx build \
     --platform "$PLATFORMS" \
     --build-arg ALPINE_VERSION=$ALPINE_VERSION \
     --build-arg PKG_VERSION=$PKG_VERSION \
