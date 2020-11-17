@@ -1,4 +1,4 @@
 #!/bin/bash
-set -euo pipefail
+set -euxo pipefail
 source ./.env
-docker run --rm --privileged docker/binfmt:latest --install "$PLATFORMS"
+docker run --rm --privileged tonistiigi/binfmt:latest --install "$PLATFORMS"
