@@ -10,6 +10,9 @@ jobs:
     steps:
       - checkout
       - run:
+          command: ./install-binfmt-platforms.sh
+          name: Install binfmt Platforms
+      - run:
           command: ./build-multiarch.sh
           name: Build
   deploy:
