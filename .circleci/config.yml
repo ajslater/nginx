@@ -10,9 +10,6 @@ jobs:
     steps:
       - checkout
       - run:
-          command: sudo ./experimental-docker.sh
-          name: Enable experimental docker
-      - run:
           command: ./build-multiarch.sh
           name: Build
   deploy:
