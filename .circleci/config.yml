@@ -1,53 +1,49 @@
 executors:
-    docker-publisher:
-        machine: true
+  latest-machine:
+    machine:
+      image: ubuntu-2004:202010-01
 jobs:
-    build:
-        executor: docker-publisher
-        steps:
-            - checkout
-            - run:
-                command: ./build.sh
-                name: Build Nginx
-            - run:
-                command: ./ci/archive-image.sh ./<< pipeline.parameters.image_archive >>
-                name: Archive Docker image
-            - persist_to_workspace:
-                paths:
-                    - ./<< pipeline.parameters.image_archive >>
-                    - ./env
-                    - ./ci/tag-and-push.sh
-                root: .
-    deploy:
-        executor: docker-publisher
-        steps:
-            - attach_workspace:
-                at: .
-            - run:
-                command: docker load -i "./<< pipeline.parameters.image_archive >>"
-                name: Load archive Docker image
-            - run:
-                command: ./ci/tag-and-push.sh
-                name: Publish Docker Image to Docker Hub
-parameters:
-    image_archive:
-        default: image.tar
-        type: string
+  build:
+    environment:
+      BUILDX_NO_DEFAULT_LOAD: 1
+    executor: latest-machine
+    steps:
+      - checkout
+      - run:
+          command: ./install-binfmt-platforms.sh
+          name: Install binfmt Platforms
+      - run:
+          command: ./build-multiarch.sh
+          name: Build
+  deploy:
+    environment:
+      PUSH: "--push"
+    executor: latest-machine
+    steps:
+      - checkout
+      - run:
+          command: docker login --username="$DOCKER_USER" --password="$DOCKER_PASS"
+          name: Login to Docker Hub
+      - run:
+          command: ./install-binfmt-platforms.sh
+          name: Install binfmt Platforms
+      - run:
+          command: ./build-multiarch.sh
+          name: Build & Push
 version: 2.1
 workflows:
-    build-deploy:
-        jobs:
-            - build:
-                filters:
-                    branches:
-                        only:
-                            - develop
-                            - master
-            - deploy:
-                filters:
-                    branches:
-                        only: master
-                requires:
-                    - build
-    version: 2.1
-
+  main:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - develop
+                - /.*-ci/
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
+                - main
+  version: 2.1
