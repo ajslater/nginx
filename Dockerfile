@@ -7,7 +7,9 @@ LABEL version=$VERSION
 RUN apk add --no-cache \
     nginx=$PKG_VERSION \
     nginx-mod-http-headers-more=$PKG_VERSION \
-    nginx-mod-http-fancyindex=$PKG_VERSION;
+    nginx-mod-http-fancyindex=$PKG_VERSION \
+    nginx-mod-http-brotli=$PKG_VERSION;
+
 RUN mkdir /run/nginx;
 
 COPY ssl /etc/nginx/ssl

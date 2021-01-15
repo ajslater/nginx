@@ -2,8 +2,9 @@
 
 ## Modules
 
-- fancyindex
-- header-more
+- [brotli](https://github.com/google/ngx_brotli)
+- [fancyindex](https://www.nginx.com/resources/wiki/modules/fancy_index/)
+- [header-more](https://github.com/openresty/headers-more-nginx-module#readme)
 
 ## Config
 
@@ -41,4 +42,4 @@ PUID & PGUID will run the process as a user with that UID and GID. If you omit t
 
 ## Docker Image
 
-https://hub.docker.com/r/ajslater/nginx
+[ajslater/nginx](https://hub.docker.com/r/ajslater/nginx)
