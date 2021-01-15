@@ -1,3 +1,3 @@
-https://pkgs.alpinelinux.org/packages?name=nginx&arch=x86_64&branch=v3.12
-https://pkgs.alpinelinux.org/package/v3.12/main/x86_64/nginx
-https://git.alpinelinux.org/aports/tree/main/nginx/APKBUILD?h=v3.12.1
+https://pkgs.alpinelinux.org/packages?name=nginx&arch=x86_64&branch=v3.13
+https://pkgs.alpinelinux.org/package/v3.13/main/x86_64/nginx
+https://git.alpinelinux.org/aports/tree/main/nginx/APKBUILD?h=v3.13.0
