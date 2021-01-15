@@ -2,6 +2,7 @@
 
 ## Modules
 
+- brotli
 - fancyindex
 - header-more
 
