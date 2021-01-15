@@ -40,6 +40,7 @@ services:
 
 PUID & PGUID will run the process as a user with that UID and GID. If you omit those variables the process will run as root.
 
-## Docker Image
+## Repos
 
-[ajslater/nginx](https://hub.docker.com/r/ajslater/nginx)
+-   [Docker Hub](https://hub.docker.com/r/ajslater/nginx)
+-   [GitHub](https://github.com/ajslater/nginx)
