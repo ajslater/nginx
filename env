@@ -1,4 +1,0 @@
-REPO=ajslater/nginx
-IMAGE=ajslater/nginx
-ALPINE_VERSION=3.12.0
-PKG_VERSION=1.18.0-r5
