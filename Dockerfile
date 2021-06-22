@@ -13,7 +13,7 @@ RUN apk add --no-cache \
 #RUN mkdir /run/nginx;
 
 COPY ssl /etc/nginx/ssl
-COPY default.conf /etc/nginx/conf.d/
+COPY default.conf /etc/nginx/http.d/
 
 EXPOSE 80
 EXPOSE 443

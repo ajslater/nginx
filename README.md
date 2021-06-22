@@ -1,5 +1,8 @@
 # AJ Nginx
 
+# WARNING: 2020-06-21 
+nginx now looks for configs in /etc/nginx/http.d/ instead of /etc/nginx/conf.d/
+
 ## Modules
 
 -   [brotli](https://github.com/google/ngx_brotli)
@@ -8,7 +11,7 @@
 
 ## Config
 
-mount directories in /etc/conf.d/ with confs in the dirs
+mount directories in /etc/nginx/http.d/ with confs in the dirs
 
 ## Example docker-compose.yaml
 
@@ -22,7 +25,7 @@ services:
         volumes:
             - /srv/www/your.org
             - /etc/nginx/ssl/your.org
-            - /etc/nginx/config.d/your.org
+            - /etc/nginx/http.d/your.org
     nginx:
         image: ajslater/nginx
         container_name: nginx
