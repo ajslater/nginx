@@ -10,8 +10,6 @@ RUN apk add --no-cache \
     nginx-mod-http-fancyindex=$PKG_VERSION \
     nginx-mod-http-brotli=$PKG_VERSION;
 
-#RUN mkdir /run/nginx;
-
 COPY ssl /etc/nginx/ssl
 COPY default.conf /etc/nginx/http.d/
 
