@@ -1,7 +1,7 @@
 # AJ Nginx
 
-# WARNING: 2020-06-21 
-nginx now looks for configs in /etc/nginx/http.d/ instead of /etc/nginx/conf.d/
+# BREAKING CHANGE 2020-06-21
+nginx now looks for vhost configs in /etc/nginx/http.d/ instead of /etc/nginx/conf.d/ as [detailed here](https://github.com/alpinelinux/aports/commit/383ba9c0a200ed1f4b11d7db74207526ad90bbe3)
 
 ## Modules
 
